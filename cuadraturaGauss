@@ -1,0 +1,27 @@
+function [a0,a1]=ajuste_con_minimos_cuadrados(x,y)
+[m n]=size(x);
+sumx=0;
+sumy=0;
+sumxy=0;
+sumx2=0;
+
+if length(y)!= n
+  msgID = 'AJUSTES CON MINIMOS CUADRADOS:condicion';
+  msg = 'Error: No tiene la misma dimension ';
+  
+  error(msgID,msg)
+else 
+  for i=1:n
+    xy(i)=x(i)*y(i);
+    x2(i)=x(i)^2;
+    sumx=sumx+x(i);
+    sumy=sumy+y(i);
+    sumxy=sumxy+xy(i);
+    sumx2=sumx2+x2(i); 
+
+  endfor
+end
+
+ a0=(sumxy-(sumx*sumy/n))/(sumx2-(sumx^2/n));
+ a1=(sumy/n)-a0*(sumx/n);
+end
